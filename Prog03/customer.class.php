@@ -256,13 +256,14 @@ class Customer {
         echo "
             </head>
             <body>
-                <a href='https://github.com/cis355/PhpProject1' target='_blank'>Github</a><br />
+                <a href='https://github.com/jtschmidt/cis355' target='_blank'>Github</a><br />
                 <div class='container'>
                     <p class='row'>
                         <h3>$this->title" . "s" . "</h3>
                     </p>
                     <p>
                         <a href='$this->tableName.php?fun=display_create_form' class='btn btn-success'>Create</a>
+			<a href='logout.php' class='btn btn-danger'>Logout</a>
                     </p>
                     <div class='row'>
                         <table class='table table-striped table-bordered'>

@@ -1,11 +1,16 @@
 <?php
+session_start();
+
+if(!isset($_SESSION["username"])) {
+	header("Location: login.php");
+}
 
 // include the class that handles database connections
-require "database.php";
+require "../Prog03/database.php";
 
 // include the class containing functions/methods for "customer" table
 // Note: this application uses "customer" table, not "cusotmers" table
-require "customers.class.php";
+require "customer.class.php";
 $cust = new Customer();
  
 // set active record field values, if any 

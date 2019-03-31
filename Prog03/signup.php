@@ -14,8 +14,8 @@ if ( !empty($_POST)) { // if not first time through
 	$name = $_POST['name'];
 	$email = $_POST['email'];
 	$mobile = $_POST['mobile'];
-	$password = $_POST['password_hash'];
-	$passwordhash = MD5($password);
+	$password = $_POST['password'];
+	//$passwordhash = MD5($password);
 
 	// validate user input
 	$valid = true;
@@ -69,11 +69,11 @@ if ( !empty($_POST)) { // if not first time through
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "INSERT INTO customer (name,email,mobile,password_hash) values(?, ?, ?, ?)";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($name,$email,$mobile,$passwordhash));
+		$q->execute(array($name,$email,$mobile,$password));
 		$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$sql = "SELECT * FROM customer WHERE email = ? AND password_hash = ? LIMIT 1";
 		$q = $pdo->prepare($sql);
-		$q->execute(array($email,$passwordhash));
+		$q->execute(array($email,$password));
 		$data = $q->fetch(PDO::FETCH_ASSOC);
 		
 		Database::disconnect();
