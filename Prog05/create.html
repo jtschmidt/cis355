@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css' rel='stylesheet'>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script type="text/javascript">
+    
+        $(document).ready( function() {
+            $("#insert").click( function() {
+                var name=$("#name").val();
+                var email=$("#email").val();
+                var mobile=$("#mobile").val();                
+                var dataString=
+                     "name="+name
+                    +"&email="+email
+                    +"&mobile="+mobile
+                    +"&insert=";
+                if(   $.trim(name).length>0 
+                    & $.trim(email).length>0 
+                    & $.trim(mobile).length>0) {
+                    $.ajax( {
+                        type: "POST",
+                        url: "http://csis.svsu.edu/~jtschmi2/Prog05/create.php",
+                        data: dataString,
+                        crossDomain: true,
+                        cache: false,
+                        beforeSend: function(){ $("#insert").val('Connecting...');},
+                        success: function(data){ location.href = "index.html"; }
+                    });
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="padding">
+        <div>
+			<h3>Customers</h3>
+		</div>
+        <div class="control-group">
+            <label class="control-label">name</label>
+            <div class="controls">
+                <input id="name" type="text"  placeholder="name" value="" required>
+            </div>
+        </div>
+        <div class="control-group ">
+            <label class="control-label">email</label>
+            <div class="controls">
+                <input id="email" type="text"  placeholder="email" value="" required>
+            </div>
+        </div>
+        <div class="control-group">
+            <label class="control-label">mobile</label>
+            <div class="controls">
+                <input id="mobile" type="text" placeholder="mobile" value="" required>
+            </div>
+        </div>
+        <div class="form-actions">
+            <input type="button" id="insert" class="btn btn-success" value="Create"/>
+            <a class="btn btn-info" href="index.html">Back</a>
+        </div>
+    </div>
+</body>
+
+</html> 

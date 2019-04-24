@@ -1,0 +1,44 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+	<link href='https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css' rel='stylesheet'>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script type="text/javascript">
+	
+		function getID() {
+			id = window.location.search.substring(1);
+			id = id.split("=");
+			return id[1];
+		} 
+    
+        $(document).ready( function() {
+            $("#delete").click( function() {
+                $.ajax( {
+                    type: "POST",
+                    url: "http://csis.svsu.edu/~jtschmi2/Prog05/delete.php",
+                    data: "id="+getID()+"&delete=",
+                    crossDomain: true,
+                    cache: false,
+                    beforeSend: function(){ $("#delete").val('Connecting...');},
+                    success: function(data){ location.href = "index.html"; }
+                });
+                return false;
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="padding">
+        <div>
+		    <h3>Customer Delete</h3>	    		
+		</div>         
+        <p class="alert alert-error">Are you sure you would like to delete this profile?</p>
+        <div class="form-actions">
+            <input type="button" id="delete" class="btn btn-danger" value="Yes"/>
+            <a class="btn btn-success" href="index.html">No</a>
+        </div>
+    </div>
+</body>
